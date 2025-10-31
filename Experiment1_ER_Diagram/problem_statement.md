@@ -23,28 +23,31 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 
 ### ER Diagram:
 *Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+<img width="752" height="422" alt="486723333-8a80c489-abfd-4bbe-9586-bf08690b8c97" src="https://github.com/user-attachments/assets/346f3e6b-1fad-468f-bf00-c044593de978" />
+
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+Entity	Attributes (PK, FK)	Notes
+MEMBER	Member_ID (PK), Name, Membership_Type, Start_Date	Tracks all gym members
+PROGRAM	Program_ID (PK), Program_Name, Type	Yoga, Zumba, Weight Training
+TRAINER	Trainer_ID (PK), Name, Specialization	A trainer may take multiplE programs
+SESSION	Session_ID (PK), Member_ID (FK), Trainer_ID (FK), Date, Time	For personal training sessions
+ATTENDANCE	Attendance_ID (PK), Session_ID (FK), Status (Present/Absent)	Records session attendance
 
 ### Relationships and Constraints
 
 | Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+
+|Relationship	Cardinality	Participation	Notes
+Member–Program (Joins)	M:N	Partial	A member can join many programs
+Program–Trainer (Assigned)	M:N	Total	Programs can have multiple trainers
+Session–Attendance	1:M	Partial	Each session must have attendance record              |            |               |       |
 
 ### Assumptions
-- 
+- Overdue fines are stored per Loan record.
+BookCopy not modeled
+Rooms serve both events and study bookings.
 - 
 - 
 
@@ -65,29 +68,33 @@ The Central Library wants to manage book lending and cultural events.
 
 ### ER Diagram:
 *Paste or attach your diagram here*  
-![ER Diagram](er_diagram_library.png)
+<img width="728" height="852" alt="486727912-1702e1d1-3120-4d28-b9df-936127b873ba" src="https://github.com/user-attachments/assets/b1498d32-c8e3-473f-82b2-6f7c79097331" />
+
 
 ### Entities and Attributes
+Entity	Attributes (PK, FK)	Notes
+Member	MemberID (PK), Name, Address, Phone, Email	Library members
+Book	BookID (PK), Title, Author, Category, ISBN, PubYear	Books in collection
+Loan	LoanID (PK), LoanDate, DueDate, ReturnDate, FineAmount, MemberID (FK), BookID (FK)	Tracks book borrowing
+Event	EventID (PK), Name, Description, EventDate, StartTime, EndTime, RoomID (FK)	Library cultural events
+Speaker	SpeakerID (PK), Name, Bio, ContactInfo	Event speakers/authors
+Booking	BookingID (PK), BookingDate, StartTime, EndTime, RoomID (FK), MemberID (FK)	Study room reservations
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
 
 ### Relationships and Constraints
+Relationship	Cardinality	Participation	Notes
+Member–Book	M:N	Mandatory for Loan, Optional for Member/Book	Members borrow books
+Member–Event	M:N	Mandatory for Registration, Optional for Member/Event	Members register for events
+Event–Speaker	M:N	Mandatory for EventSpeaker, Optional for Event/Speaker	Events may have multiple speakers
+Event–Room	1:N	Mandatory for Event, Optional for Room	Each event in one room
+Room–Booking	1:N	Mandatory for Booking, Optional for Room	Rooms booked for study by members
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
 
 ### Assumptions
 - 
-- 
+- Overdue fines are stored per Loan record.
+BookCopy not modeled
+Rooms serve both events and study bookings.
 - 
 
 ---
@@ -107,28 +114,26 @@ A popular restaurant wants to manage reservations, orders, and billing.
 
 ### ER Diagram:
 *Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
+<img width="1009" height="603" alt="486725092-72af93ad-03e0-4dc8-b7c2-59fc13bf16b3" src="https://github.com/user-attachments/assets/84097526-27b5-44c8-8ad9-cdeb3b99ce97" />
+
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+Entity	Attributes (PK, FK)	Notes
+CHEF	Chef_id (PK), Chef_name, Chef_salary	Each chef is uniquely identified by Chef_id. Prepares meals.
+MEAL	meal_name (PK), meal_price	A meal is prepared by chefs, ordered by customers, and consists OF ingredients.
+INGREDIENTS	ing_name (PK), description	Each ingredient has a unique name and is linked to meals.
+CUSTOMERS	cust_phone (PK), cust_name, cust_address	Customers place orders for meals.
+SUPPLIER	S_id (PK), S_name, S_city	Suppliers attend to customers.
 
 ### Relationships and Constraints
-
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+Relationship	Cardinality	Participation	Notes
+prepares (CHEF–MEAL)	1:N	CHEF (total), MEAL (partial)	One chef can prepare many meals, but a meal is prepared by one chef.
+orders (CUSTOMERS–MEAL)	M:N	Both partial	A customer can order many meals, and a meal can be ordered by many customers
+consists of (MEAL–INGREDIENTS)	M:N	Both total	Each meal consists of multiple ingredients, and each ingredient can be part of many meals.
 
 ### Assumptions
-- 
+- Each chef can prepare multiple meals, but a meal is prepared by only one chef. A customer can place multiple orders, and each order may include one or more meals. Each meal consists of one or more ingredients, and an ingredient may be used in multiple meals.
 - 
 - 
 
