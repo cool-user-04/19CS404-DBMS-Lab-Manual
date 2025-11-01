@@ -256,8 +256,9 @@ ON
 ```
 
 **Output:**
+<img width="1037" height="660" alt="440259292-f2ed3a8d-50ee-4576-b936-9dfde3589de2" src="https://github.com/user-attachments/assets/54b896e6-ee3f-487f-9c1a-9c37b87057ec" />
 
-<img width="1037" height="660" alt="440259292-f2ed3a8d-50ee-4576-b936-9dfde3589de2" src="https://github.com/user-attachments/assets/33c0f863-6bc1-4570-a560-3d9786f6da02" />
+
 
 
 
