@@ -4,7 +4,6 @@
 To write and execute PL/SQL programs using cursors and exception handling to manage runtime errors effectively and display appropriate messages.
 
 ## THEORY
-
 In PL/SQL, cursors are used to handle query result sets row-by-row. 
 
 There are two types of cursors:
